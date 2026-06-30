@@ -1,9 +1,9 @@
 export const SITE = {
   name:       'Anuj Construction',
   tagline:    'Building Dreams, Delivering Excellence',
-  phone:      '+91 98765 43210',
-  email:      'info@anujconstruction.com',
-  address:    '123 Builder Street, Construction Nagar, India',
+  phone:      '+91 8429949411',
+  email:      'info anupanyadav73458@gmail.com.com',
+  address:    '123 VIKRAMPUR, MAHARAJGANG, AURAI, BHADOHI, India',
   founded:    2003,
   experience: '20+',
   license:    'LIC # GC-2003-7845',
