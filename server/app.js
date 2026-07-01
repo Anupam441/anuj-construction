@@ -6,7 +6,6 @@ import mongoSanitize from 'express-mongo-sanitize';
 import { rateLimit } from 'express-rate-limit';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
 import authRoutes        from './routes/auth.js';
 import projectRoutes     from './routes/projects.js';
 import serviceRoutes     from './routes/services.js';
@@ -19,17 +18,25 @@ const __dirname  = path.dirname(__filename);
 const app        = express();
 
 app.use(helmet());
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: [
+    'http://localhost:5173',
+    'https://anuj-construction-client.vercel.app',
+    process.env.CLIENT_URL,
+  ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
 app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 200 }));
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(mongoSanitize());
+
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
+
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.get('/api/health', (_req, res) => {
